@@ -1,0 +1,14 @@
+{
+    "name": "gib"
+  , "description": "github issue board"
+  , "version": "0.0.1"
+  , "keywords": ["github", "issues", "kanban", "board"]
+  , "dependencies": {
+      "express": "3.4.x"
+  }
+  , "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  }
+  , "main": "server"
+}
