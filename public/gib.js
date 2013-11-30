@@ -17,7 +17,7 @@ function Gib (token, user, repo) {
         readConfig(log);
       });
     }
-  })
+  });
 
   function readConfig (fn) {
     gib.read(Gib.BRANCH, Gib.CONFIG_FILE, function(err, data) {

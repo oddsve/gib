@@ -1,23 +1,25 @@
-<script src="underscore.js"></script>
-<script src="github.js"></script>
-<script src="gib.js"></script>
-<script>
-  (function () {
-    var newToken = location.hash.replace('#', '');
+<!DOCTYPE html>
+<html ng-app="gib">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>gib</title>
+    <script src="install.js"></script>
+  </head>
+  <body>
+    <a ng-href="#/">index</a>
+    <a ng-href="#/now">now</a>
 
-    if (newToken) {
-      localStorage.setItem('token', newToken);
-      location.hash = '#';
-    }
+    <div ng-view></div>
 
-    var token = localStorage.getItem('token');
-    if (!token) {
-      location.href = '/auth/github';
-      return;
-    }
+    <script src="underscore.js"></script>
 
-    console.log('all good');
+    <script src="angular.js"></script>
+    <script src="angular-route.js"></script>
 
-    new Gib(token, 'oddsve', 'gib');
-  })();
-</script>
+    <script src="github.js"></script>
+
+    <script src="gib.js"></script>
+
+    <script src="app.js"></script>
+  </body>
+</html>
