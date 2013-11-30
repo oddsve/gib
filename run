@@ -1,0 +1,3 @@
+github_clientid=INSERT_CLIENT_ID_HERE \
+github_clientsecret=INSERT_CLIENT_SECRET_HERE \
+nodemon server.js
