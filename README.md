@@ -6,6 +6,7 @@ gib
 - node.js >= 0.10
 - nodemon
 
+
     npm install -g nodemon
 
 ### setup
