@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - 0.10
+deploy:
+  provider: heroku
+  api_key:
+    secure: NiX8mMD+NzFbA9Hxfk8HopOnLUbuAGQbwcZ2t161X8W2fGpEV3oZcfR1m7QTwRwp0dhYfZ4PwlZnS2mPA8E/c0Em5dl3acVNDDs8Zz3Fasq5e88xmSBS6+BgH2U+mMD7wKi699MV4hyl2roHcKEYEpEOyvZpZyuwjzpBJWer3FM=
+  app: getgib
+  on:
+    repo: oddsve/gib
