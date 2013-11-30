@@ -4,12 +4,14 @@ gib
 ### dependencies
 
 - node.js >= 0.10
+- nodemon
 
+    npm install -g nodemon
 
 ### run
 
     npm install
-    node server.js
+    nodemon server.js
 
 ### deploy
 

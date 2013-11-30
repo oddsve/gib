@@ -8,7 +8,12 @@
     "url" : "http://github.com/oddsve/gib.git"
   },
   "dependencies": {
-      "express": "3.4.x"
+    "express": "3.4.x",
+
+    "nconf": "0.6.x",
+
+    "passport": "0.1.x",
+    "passport-github": "0.1.x",
   },
   "engines": {
     "node": "0.10.x",
