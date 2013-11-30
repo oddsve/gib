@@ -1,1 +1,9 @@
-{{board}}
+<h1>{{repo}}-board</h1>
+<input ng-model="searchText" type="text">
+<ul>
+    <li ng-repeat="station in stations">{{station.name}}
+        <ul>
+            <li ng-repeat="issue in station.issues | filter:searchText">{{issue.title}}</li>
+        </ul>
+    </li>
+</ul>
