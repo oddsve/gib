@@ -24,12 +24,38 @@ app.config(function ($routeProvider, $locationProvider) {
     });
 });
 
-app.controller('IndexController', ['token', function (token) {
-  console.log(token);
+app.controller('IndexController',
+  ['$scope', 'Github',
+  function ($scope, Github) {
+    Github.repos().then(function (repos) {
+      $scope.repos = repos;
+    });
 }]);
 
 app.controller('NowController', ['$scope', function ($scope) {
   $scope.now = new Date();
 }]);
 
+app.service('Github',
+  ['$q', 'token',
+  function ($q, token) {
+
+  var github = new Github({ token: token });
+
+  function repos () {
+    var d = $q.defer();
+
+    var user = github.getUser();
+    user.repos(function (err, repos) {
+      if (err) d.reject(err);
+      else d.resolve(repos);
+    });
+
+    return d.promise;
+  }
+
+  return {
+    repos: repos
+  }
+}]);
 
