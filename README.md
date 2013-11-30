@@ -8,10 +8,24 @@ gib
 
     npm install -g nodemon
 
+### setup
+
+Create a file called `run`.
+
+Put this inside it
+
+    github_clientid= \
+    github_clientsecret= \
+    nodemon server.js
+    
+Then do
+
+    `chmod u+x run`
+
 ### run
 
     npm install
-    nodemon server.js
+    ./run
 
 ### deploy
 
