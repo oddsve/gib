@@ -1,9 +1,23 @@
-<a href="/auth/github">log in with github</a>
 <script src="underscore.js"></script>
 <script src="github.js"></script>
 <script src="gib.js"></script>
 <script>
-  var token = location.hash.replace('#', '');
+  (function () {
+    var newToken = location.hash.replace('#', '');
 
-  new Gib(token, 'oddsve', 'gib');
+    if (newToken) {
+      localStorage.setItem('token', newToken);
+      location.hash = '#';
+    }
+
+    var token = localStorage.getItem('token');
+    if (!token) {
+      location.href = '/auth/github';
+      return;
+    }
+
+    console.log('all good');
+
+    new Gib(token, 'oddsve', 'gib');
+  })();
 </script>
