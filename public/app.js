@@ -4,11 +4,6 @@ app.config(function ($routeProvider, $locationProvider) {
 
   $routeProvider
 
-    .when('/token/:token', {
-      controller: 'InstallController',
-      templateUrl: 'partials/index.html'
-    })
-
     .when('/', {
       controller: 'IndexController',
       templateUrl: 'partials/index.html'
@@ -51,6 +46,9 @@ app.controller('IndexController',
 
 app.controller('BoardController', ['$scope', function ($scope) {
   $scope.board = "New board";
+  ['$scope', 'Github',
+  function ($scope, Github) {
+    $scope.repos = Github.repos();
 }]);
 
 app.controller('NowController', ['$scope', function ($scope) {
@@ -58,8 +56,8 @@ app.controller('NowController', ['$scope', function ($scope) {
 }]);
 
 app.service('Github',
-  ['$q', 'token',
-  function ($q, token) {
+  ['$q', '$rootScope', 'token',
+  function ($q, $rootScope, token) {
 
   var github = new Github({ token: token });
 
@@ -68,8 +66,10 @@ app.service('Github',
 
     var user = github.getUser();
     user.repos(function (err, repos) {
-      if (err) d.reject(err);
-      else d.resolve(repos);
+      $rootScope.$apply(function () {
+        if (err) d.reject(err);
+        else d.resolve(repos);
+      });
     });
 
     return d.promise;
