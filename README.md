@@ -18,9 +18,7 @@ Put this inside it
     github_clientsecret= \
     nodemon server.js
     
-Then do
-
-    `chmod u+x run`
+Then do `chmod u+x run`
 
 ### run
 
