@@ -13,7 +13,7 @@ app.config(function ($routeProvider, $locationProvider) {
       templateUrl: 'partials/index.html'
     })
 
-    .when('/board', {
+    .when('/board/:user/:repo', {
         controller: 'BoardController',
         templateUrl: 'partials/board.html'
     })

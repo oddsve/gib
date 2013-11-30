@@ -4,7 +4,8 @@ angular.module('gib.controllers', [])
   function ($scope, Github, $location) {
 
     $scope.createBoardClicked = function () {
-      $location.path("/board");
+      $location.path("/board/" + $scope.selectedRepo.full_name);
+      console.log($scope.selectedRepo);
     };
 
     Github.repos().then(function (repos) {
