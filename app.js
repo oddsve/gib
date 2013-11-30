@@ -17,6 +17,6 @@ app.get('/', function (req, res) {
 });
 app.get('/auth/github', passport.authenticate('github', { scope: ['repo', 'public_repo'] }));
 app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/' }), function (req, res) {
-  res.redirect('/#' + req.user.accessToken);
+  res.redirect('/#/token/' + req.user.accessToken);
 });
 

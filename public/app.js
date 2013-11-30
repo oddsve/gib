@@ -1,8 +1,13 @@
 var app = angular.module('gib', ['ngRoute']);
-
+app.value('token', localStorage.getItem('token'));
 app.config(function ($routeProvider, $locationProvider) {
 
   $routeProvider
+
+    .when('/token/:token', {
+      controller: 'InstallController',
+      templateUrl: 'partials/index.html'
+    })
 
     .when('/', {
       controller: 'IndexController',
@@ -19,11 +24,12 @@ app.config(function ($routeProvider, $locationProvider) {
     });
 });
 
-app.controller('IndexController', [function () {
-  console.log('index');
+app.controller('IndexController', ['token', function (token) {
+  console.log(token);
 }]);
 
 app.controller('NowController', ['$scope', function ($scope) {
   $scope.now = new Date();
 }]);
+
 
