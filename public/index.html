@@ -1,1 +1,9 @@
 <a href="/auth/github">log in with github</a>
+<script src="underscore.js"></script>
+<script src="github.js"></script>
+<script src="gib.js"></script>
+<script>
+  var token = location.hash.replace('#', '');
+
+  new Gib(token, 'oddsve', 'gib');
+</script>

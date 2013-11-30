@@ -15,9 +15,8 @@ app.use(app.router)
 app.get('/', function (req, res) {
   res.sendfile('public/index.html');
 });
-app.get('/auth/github', passport.authenticate('github'));
+app.get('/auth/github', passport.authenticate('github', { scope: ['repo', 'public_repo'] }));
 app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/' }), function (req, res) {
-  res.json(req.user);
+  res.redirect('/#' + req.user.accessToken);
 });
-
 
