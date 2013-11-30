@@ -15,9 +15,7 @@ nconf.defaults({
     // - Homepage URL: http://localhost:3000/
     // - Authorization callback URL: http://localhost:3000/auth/github/callback
     //
-    // Set these environment variables before running the app:
-    //   github_clientid=...
-    //   github_clientsecret=...
+    // Set these environment variables in your `run` file
     //
     // Or paste them in below
     //
