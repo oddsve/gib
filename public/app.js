@@ -14,6 +14,11 @@ app.config(function ($routeProvider, $locationProvider) {
       templateUrl: 'partials/index.html'
     })
 
+    .when('/board', {
+        controller: 'BoardController',
+        templateUrl: 'partials/board.html'
+    })
+
     .when('/now', {
       controller:  'NowController',
       templateUrl: 'partials/now.html'
@@ -25,11 +30,27 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('IndexController',
-  ['$scope', 'Github',
-  function ($scope, Github) {
-    Github.repos().then(function (repos) {
-      $scope.repos = repos;
-    });
+  ['$scope', 'Github', '$location',
+
+
+  function ($scope, Github, $location) {
+
+
+
+      $scope.createBoardClicked = function () {
+          $location.path("/board")
+      }
+
+      Github.repos().then(function (repos) {
+        $scope.repos = repos;
+      });
+
+
+}]);
+
+
+app.controller('BoardController', ['$scope', function ($scope) {
+  $scope.board = "New board";
 }]);
 
 app.controller('NowController', ['$scope', function ($scope) {

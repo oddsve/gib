@@ -1,1 +1,10 @@
-{{repos}}
+<div>
+
+    <select ng-model="selectedRepo" ng-options="repo.name for repo in repos" >
+        <option value="">Select repo</option>
+    </select>
+
+    <button ng-click="createBoardClicked()">Create board</button>
+
+</div>
+
