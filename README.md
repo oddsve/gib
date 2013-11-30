@@ -1,4 +1,4 @@
-gib
+gib [![Build Status](https://travis-ci.org/oddsve/gib.png?branch=master)](https://travis-ci.org/oddsve/gib)
 =========
 
 ### dependencies
