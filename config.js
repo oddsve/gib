@@ -6,24 +6,11 @@ nconf.env('_'); // Look for config in env. Keys with : translates to _ in env va
 
 nconf.defaults({
   "github": {
-    //
-    // !!!
-    //
-    // You need your own Github Application for using github oauth from localhost:3000
-    // https://github.com/settings/applications/new
-    // - Application Name: gib-local
-    // - Homepage URL: http://localhost:3000/
-    // - Authorization callback URL: http://localhost:3000/auth/github/callback
-    //
-    // Set these environment variables in your `run` file
-    //
-    // Or paste them in below
-    //
     "clientid":     "",
     "clientsecret": ""
   }
 });
 
 if (!nconf.get('github:clientid') || !nconf.get('github:clientsecret')) {
-  throw new Error("gib: Application is missing oauth clientid and clientsecret - have a look at gib's config.js for instructions on how to fix this!");
+  throw new Error("gib: Application is missing oauth clientid and clientsecret - see README.md on how to set up a dummy Github Application for using on localhost.");
 }
