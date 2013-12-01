@@ -100,7 +100,7 @@ angular.module('gib.services', [])
           .branches(repo)
           .then(findOrCreateGibBranch(repo))
           .then(readOrCreateConfig(repo))
-          .then(parseJsonStringToObject);
+          .then(parseConfigStringToObject);
 
       var issuesPromise =
         Github
@@ -169,7 +169,7 @@ angular.module('gib.services', [])
       return d.promise;
     }
 
-    function parseJsonStringToObject (data) {
+    function parseConfigStringToObject (data) {
       var d = $q.defer();
       try {
         d.resolve(JSON.parse(data));
