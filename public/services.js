@@ -82,7 +82,11 @@ angular.module('gib.services', [])
 
     var EMPTY_CONFIG_FILE = JSON.stringify({
       version: '0.0.1',
-      stations: ['backlog', 'in progress', 'done']
+      stations: [
+        { issues: [], name: 'backlog' },
+        { issues: [], name: 'in progress' },
+        { issues: [], name: 'done' }
+      ]
     });
 
     function findOrCreateBoard (user, repository) {
@@ -179,15 +183,6 @@ angular.module('gib.services', [])
     function joinConfigWithIssues (configAndIssues) {
       var config = configAndIssues[0];
       var issues = configAndIssues[1];
-
-      // map stations to expected format
-      var transformedStations = config.stations.map(function (station) {
-        return {
-          name: station,
-          issues: []
-        };
-      });
-      config.stations = transformedStations;
 
       // todo
       // put all issues not already in a station into backlog
