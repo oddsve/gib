@@ -117,6 +117,27 @@ angular.module('gib.services', [])
       return d.promise;
     }
 
+    function saveBoard (user, repository, board) {
+      var d = $q.defer();
+
+      var boardJSON;
+      try {
+        boardJSON = JSON.stringify(board);
+      }
+      catch (e) {
+        d.reject(e);
+      }
+
+      var repo = Github.repo(user, repository);
+
+      Github
+        .write(repo, BRANCH, CONFIG_FILE, boardJSON, nextCommit())
+        .then(d.resolve)
+        .catch(d.reject);
+
+      return d.promise;
+    }
+
     function findOrCreateGibBranch (repo) {
 
       return function (branches) {
@@ -184,13 +205,27 @@ angular.module('gib.services', [])
       var config = configAndIssues[0];
       var issues = configAndIssues[1];
 
-      // todo
-      // put all issues not already in a station into backlog
+      var issuesById = {};
+      _.each(issues, function (issue) {
+        issuesById[issue.id] = issue;
+      });
 
-      // for now..
-      // add all issues to backlog
+      var issuesInStations = [];
+      _.each(config.stations, function (station) {
+
+        var updatedIssuesForStation = [];
+        _.each(station.issues, function (issue) {
+          issuesInStations.push(issue.id);
+          updatedIssuesForStation.push(issuesById[issue.id]);
+        });
+
+        station.issues = updatedIssuesForStation;
+      });
+
       var backlog = config.stations[0];
-      backlog.issues = _.union(backlog.issues, issues);
+      backlog.issues = backlog.issues.concat(_.filter(issues, function (issue) {
+        return issuesInStations.indexOf(issue.id) == -1;
+      }));
 
       return config;
     }
@@ -204,7 +239,8 @@ angular.module('gib.services', [])
     }
 
     return {
-      findOrCreateBoard: findOrCreateBoard
+      findOrCreateBoard: findOrCreateBoard,
+      saveBoard: saveBoard
     };
 
 }]);

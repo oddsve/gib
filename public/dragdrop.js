@@ -12,7 +12,7 @@ angular.module('gib.dragdrop', [])
       'dragstart',
       function (e) {
         e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('id', this.id);
+        e.dataTransfer.setData('json', this.dataset.json);
         this.classList.add('drag');
         return false;
       },
@@ -78,15 +78,17 @@ angular.module('gib.dragdrop', [])
 
           this.classList.remove('over');
 
-          var item = document.getElementById(e.dataTransfer.getData('id'));
+          var data = JSON.parse(e.dataTransfer.getData('json'));
+          var item = document.getElementById(data.id);
           this.appendChild(item);
 
-          var binId = this.id;
+          var station = JSON.parse(this.dataset.json);
+
           // call the passed drop function
           scope.$apply(function (scope) {
             var fn = scope.drop();
             if ('undefined' !== typeof fn) {
-              fn(item.id, binId);
+              fn(data, station);
             }
           });
 

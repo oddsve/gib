@@ -17,17 +17,26 @@ angular.module('gib.controllers', [])
   ['$scope', 'Gib', '$routeParams',
   function ($scope, Gib, $routeParams) {
 
-    $scope.repoName =  $routeParams.repo;
-    var userName =  $routeParams.user;
+    var repo = $scope.repoName = $routeParams.repo;
+    var user = $routeParams.user;
 
+    Gib.findOrCreateBoard(user, repo)
+       .then(function (board) {
 
-  Gib.findOrCreateBoard(userName,  $scope.repoName).then(function (board) {
-    $scope.stations = board.stations;
-  });
+      $scope.stations = board.stations;
 
-  $scope.ondrop = function (issueNumberCssId, stationIdCssId) {
-    console.log(issueNumberCssId, stationIdCssId);
-  };
+      $scope.ondrop = function (fromElData , toElData) {
+        var stations = board.stations;
 
+        var fromStation = stations[fromElData.stationId];
+        var issue = _.findWhere(fromStation.issues, { id: fromElData.issueId });
+        fromStation.issues = _.without(fromStation.issues, issue);
+
+        var toStation = stations[toElData.stationId];
+        toStation.issues.push(issue);
+
+        Gib.saveBoard(user, repo, board);
+      };
+    });
 }]);
 

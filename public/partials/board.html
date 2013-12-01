@@ -11,12 +11,14 @@ Search in issues: <input ng-model="searchText" type="text">
       class="issues"
       droppable
       drop="ondrop"
+      data-json='{ "stationId": {{station.id}} }'
       id="station-{{station.id}}">
 
       <li
         class="issue"
         ng-repeat="issue in station.issues | filter:searchText"
         draggable
+        data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "stationId": {{station.id}} }'
         id="issue-{{issue.id}}">
 
         <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
