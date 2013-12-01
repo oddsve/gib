@@ -28,7 +28,7 @@ angular.module('gib.controllers', [])
       $scope.ondrop = function (fromElData , toElData) {
         var stations = board.stations;
 
-        var fromStation = stations[fromElData.stationId];
+        var fromStation = _.findWhere(stations, { id: fromElData.stationId });
         var issue = _.findWhere(fromStation.issues, { id: fromElData.issueId });
         fromStation.issues = _.without(fromStation.issues, issue);
 
