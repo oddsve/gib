@@ -6,61 +6,52 @@ angular.module('gib.services', [])
 
   var github = new Github({ token: token });
 
+  function resolver (d, data) {
+    return function (err, response) {
+      if (err) d.reject(err);
+      else d.resolve(data || response);
+    };
+  }
+
   function repo (user, repo) {
     return github.getRepo(user, repo);
   }
 
   function repos () {
     var d = $q.defer();
-
     var user = github.getUser();
-    user.repos(function (err, repos) {
-      $rootScope.$apply(function () {
-        if (err) d.reject(err);
-        else d.resolve(repos);
-      });
-    });
-
+    user.repos(resolver(d));
     return d.promise;
   }
 
   function branches (repo) {
     console.log('list branches');
     var d = $q.defer();
-    repo.listBranches(function (err, branches) {
-      if (err) d.reject(err);
-      else d.resolve(branches);
-    });
+    repo.listBranches(resolver(d));
     return d.promise;
   }
 
   function createBranch (repo, branch) {
     console.log('create branch');
     var d = $q.defer();
-    repo.branch('master', branch, function (err) {
-      if (err) d.reject(err);
-      else d.resolve(branch);
-    });
+    repo.branch('master', branch, resolver(d));
     return d.promise;
   }
 
   function read (repo, branch, file) {
     var d = $q.defer();
-    repo.read(branch, file, function (err, data) {
-      console.log(err, data);
-      if (err) d.reject(err);
-      else d.resolve(data);
-    });
+    repo.read(branch, file, resolver(d));
     return d.promise;
   }
 
   function write (repo, branch, file, content, msg) {
     var d = $q.defer();
-    repo.write(branch, file, content, msg, function (err) {
-      if (err) d.reject(err);
-      else d.resolve(content);
-    });
+    repo.write(branch, file, content, msg, resolver(d, content));
     return d.promise;
+  }
+
+  function issues () {
+    // todo list all issues
   }
 
   return {
@@ -69,7 +60,8 @@ angular.module('gib.services', [])
     branches: branches,
     createBranch: createBranch,
     read: read,
-    write: write
+    write: write,
+    issues: issues
   };
 }])
 
@@ -78,15 +70,13 @@ angular.module('gib.services', [])
   function ($q, $rootScope, Github) {
 
     var BRANCH = 'gib';
+
     var CONFIG_FILE = '.gib';
+
     var EMPTY_CONFIG_FILE = JSON.stringify({
       version: '0.0.1',
       stations: ['backlog', 'in progress', 'done']
     });
-
-    function log (what) {
-      console.log(what);
-    }
 
     function createBoard (user, repo) {
       console.log('create board');
@@ -98,47 +88,74 @@ angular.module('gib.services', [])
         .branches(repo)
         .then(findOrCreateGibBranch(repo))
         .then(readOrCreateConfig(repo))
+        .then(parseStringToJson)
         .then(d.resolve)
+        .catch(d.reject);
 
       return d.promise;
     }
 
     function findOrCreateGibBranch (repo) {
+
       return function (branches) {
         console.log('find or create branch');
         var d = $q.defer();
+
         if (hasGibBranch(branches)) {
           d.resolve(BRANCH);
         }
         else {
           Github
             .createBranch(repo, BRANCH)
-            .then(d.resolve, d.reject);
+            .then(d.resolve)
+            .catch(d.reject);
         }
+
         return d.promise;
       }
     }
 
     function readOrCreateConfig (repo) {
+
       return function () {
         console.log('read config file');
         var d = $q.defer();
+
         Github
           .read(repo, BRANCH, CONFIG_FILE)
-          .then(d.resolve, createConfig(repo));
+          .then(d.resolve)
+          .catch(function () {
+
+            createConfig(repo)
+              .then(d.resolve)
+              .catch(d.reject);
+          });
+
         return d.promise;
       }
     }
 
-    function createConfig (repo) {
-      return function () {
-        console.log('create config file');
-        var d = $q.defer();
-        Github
-          .write(repo, BRANCH, CONFIG_FILE, EMPTY_CONFIG_FILE, nextCommit())
-          .then(d.resolve);
-        return d.promise;
+    function parseStringToJson (data) {
+      var d = $q.defer();
+      try {
+        d.resolve(JSON.parse(data));
       }
+      catch (e) {
+        d.reject(e);
+      }
+      return d.promise;
+    }
+
+    function createConfig (repo) {
+      console.log('create config file');
+      var d = $q.defer();
+
+      Github
+        .write(repo, BRANCH, CONFIG_FILE, EMPTY_CONFIG_FILE, nextCommit())
+        .then(d.resolve)
+        .catch(d.reject);
+
+      return d.promise;
     }
 
     function hasGibBranch (branches) {
