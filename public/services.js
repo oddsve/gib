@@ -91,11 +91,22 @@ angular.module('gib.services', [])
 
       var repo = Github.repo(user, repository);
 
-      Github
-        .branches(repo)
-        .then(findOrCreateGibBranch(repo))
-        .then(readOrCreateConfig(repo))
-        .then(parseJsonStringToObject)
+      var configPromise =
+        Github
+          .branches(repo)
+          .then(findOrCreateGibBranch(repo))
+          .then(readOrCreateConfig(repo))
+          .then(parseJsonStringToObject);
+
+      var issuesPromise =
+        Github
+          .issues(user, repository);
+
+      $q.all([
+          configPromise,
+          issuesPromise
+        ])
+        .then(joinConfigWithIssues)
         .then(d.resolve)
         .catch(d.reject);
 
@@ -142,6 +153,18 @@ angular.module('gib.services', [])
       }
     }
 
+    function createConfig (repo) {
+      console.log('create config file');
+      var d = $q.defer();
+
+      Github
+        .write(repo, BRANCH, CONFIG_FILE, EMPTY_CONFIG_FILE, nextCommit())
+        .then(d.resolve)
+        .catch(d.reject);
+
+      return d.promise;
+    }
+
     function parseJsonStringToObject (data) {
       var d = $q.defer();
       try {
@@ -153,16 +176,28 @@ angular.module('gib.services', [])
       return d.promise;
     }
 
-    function createConfig (repo) {
-      console.log('create config file');
-      var d = $q.defer();
+    function joinConfigWithIssues (configAndIssues) {
+      var config = configAndIssues[0];
+      var issues = configAndIssues[1];
 
-      Github
-        .write(repo, BRANCH, CONFIG_FILE, EMPTY_CONFIG_FILE, nextCommit())
-        .then(d.resolve)
-        .catch(d.reject);
+      // map stations to expected format
+      var transformedStations = config.stations.map(function (station) {
+        return {
+          name: station,
+          issues: []
+        };
+      });
+      config.stations = transformedStations;
 
-      return d.promise;
+      // todo
+      // put all issues not already in a station into backlog
+
+      // for now..
+      // add all issues to backlog
+      var backlog = config.stations[0];
+      backlog.issues = _.union(backlog.issues, issues);
+
+      return config;
     }
 
     function hasGibBranch (branches) {

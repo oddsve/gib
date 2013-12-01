@@ -27,9 +27,7 @@ angular.module('gib.controllers', [])
   $scope.repo =  $routeParams.repo;
 
   Gib.findOrCreateBoard('oddsve', 'gib').then(function (board) {
-    $scope.stations = board.stations.map(function (station) {
-      return { name: station };
-    });
+    $scope.stations = board.stations;
   });
 
 }]);
