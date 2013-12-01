@@ -17,6 +17,10 @@ angular.module('gib.services', [])
     return github.getRepo(user, repo);
   }
 
+  function issues (user, repo) {
+    return github.getIssues(user, repo);
+  }
+
   function repos () {
     var d = $q.defer();
     var user = github.getUser();
@@ -50,8 +54,11 @@ angular.module('gib.services', [])
     return d.promise;
   }
 
-  function issues () {
-    // todo list all issues
+  function listIssues (user, repo) {
+    var d = $q.defer();
+    issues(user, repo)
+      .list({}, resolver(d));
+    return d.promise;
   }
 
   return {
@@ -61,7 +68,7 @@ angular.module('gib.services', [])
     createBranch: createBranch,
     read: read,
     write: write,
-    issues: issues
+    issues: listIssues
   };
 }])
 
@@ -78,17 +85,17 @@ angular.module('gib.services', [])
       stations: ['backlog', 'in progress', 'done']
     });
 
-    function createBoard (user, repo) {
+    function findOrCreateBoard (user, repository) {
       console.log('create board');
       var d = $q.defer();
 
-      var repo = Github.repo(user, repo);
+      var repo = Github.repo(user, repository);
 
       Github
         .branches(repo)
         .then(findOrCreateGibBranch(repo))
         .then(readOrCreateConfig(repo))
-        .then(parseStringToJson)
+        .then(parseJsonStringToObject)
         .then(d.resolve)
         .catch(d.reject);
 
@@ -135,7 +142,7 @@ angular.module('gib.services', [])
       }
     }
 
-    function parseStringToJson (data) {
+    function parseJsonStringToObject (data) {
       var d = $q.defer();
       try {
         d.resolve(JSON.parse(data));
@@ -159,7 +166,7 @@ angular.module('gib.services', [])
     }
 
     function hasGibBranch (branches) {
-      return branches.indexOf(Gib.BRANCH) != -1;
+      return branches.indexOf(BRANCH) != -1;
     }
 
     function nextCommit() {
@@ -167,7 +174,7 @@ angular.module('gib.services', [])
     }
 
     return {
-      createBoard: createBoard
+      findOrCreateBoard: findOrCreateBoard
     };
 
 }]);
