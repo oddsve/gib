@@ -1,5 +1,6 @@
 var app = angular.module('gib', [
   'ngRoute',
+  'gib.dragdrop',
   'gib.services',
   'gib.controllers'
 ]);
@@ -16,8 +17,8 @@ app.config(function ($routeProvider, $locationProvider) {
     })
 
     .when('/board/:user/:repo', {
-        controller: 'BoardController',
-        templateUrl: 'partials/board.html'
+      controller: 'BoardController',
+      templateUrl: 'partials/board.html'
     })
 
     .otherwise({

@@ -1,12 +1,27 @@
 <h1>{{repoName}}-board</h1>
 Search in issues: <input ng-model="searchText" type="text">
 <ul>
-    <li ng-repeat="station in stations">{{station.name}}
-        <ul>
-          <li ng-repeat="issue in station.issues | filter:searchText">
-            <a href="{{issue.html_url}}">#{{issue.number}}</a>
-            <span class="issue-title">{{issue.title}}</span>
-          </li>
-        </ul>
-    </li>
+  <li
+    class="station"
+    ng-repeat="station in stations">
+
+    {{station.name}}
+
+    <ul
+      class="issues"
+      droppable
+      drop="ondrop"
+      id="station-{{station.id}}">
+
+      <li
+        class="issue"
+        ng-repeat="issue in station.issues | filter:searchText"
+        draggable
+        id="issue-{{issue.id}}">
+
+        <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
+        <span class="issue-title">{{issue.title}}</span>
+      </li>
+    </ul>
+  </li>
 </ul>

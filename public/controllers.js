@@ -25,5 +25,9 @@ angular.module('gib.controllers', [])
     $scope.stations = board.stations;
   });
 
+  $scope.ondrop = function (issueNumberCssId, stationIdCssId) {
+    console.log(issueNumberCssId, stationIdCssId);
+  };
+
 }]);
 

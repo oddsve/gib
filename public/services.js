@@ -83,9 +83,9 @@ angular.module('gib.services', [])
     var EMPTY_CONFIG_FILE = JSON.stringify({
       version: '0.0.1',
       stations: [
-        { issues: [], name: 'backlog' },
-        { issues: [], name: 'in progress' },
-        { issues: [], name: 'done' }
+        { issues: [], id: 0, name: 'backlog' },
+        { issues: [], id: 1, name: 'in progress' },
+        { issues: [], id: 2, name: 'done' }
       ]
     });
 
