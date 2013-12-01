@@ -3,7 +3,9 @@ var app = angular.module('gib', [
   'gib.services',
   'gib.controllers'
 ]);
+
 app.value('token', localStorage.getItem('token'));
+
 app.config(function ($routeProvider, $locationProvider) {
 
   $routeProvider
