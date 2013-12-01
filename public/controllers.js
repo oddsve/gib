@@ -17,9 +17,11 @@ angular.module('gib.controllers', [])
   ['$scope', 'Gib', '$routeParams',
   function ($scope, Gib, $routeParams) {
 
-  $scope.repo =  $routeParams.repo;
+    $scope.repoName =  $routeParams.repo;
+    var userName =  $routeParams.user;
 
-  Gib.findOrCreateBoard('oddsve', 'gib').then(function (board) {
+
+  Gib.findOrCreateBoard(userName,  $scope.repoName).then(function (board) {
     $scope.stations = board.stations;
   });
 
