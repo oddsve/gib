@@ -117,12 +117,24 @@ angular.module('gib.services', [])
       return d.promise;
     }
 
+    function clone (obj) {
+      return JSON.parse(JSON.stringify(obj));
+    }
+
     function saveBoard (user, repository, board) {
       var d = $q.defer();
 
-      var boardJSON;
+      var boardClone,
+          boardJSON;
       try {
-        boardJSON = JSON.stringify(board);
+        // todo clean up
+        var boardClone = clone(board);
+        _.each(boardClone.stations, function (station) {
+          station.issues = station.issues.map(function (issue) {
+            return { id: issue.id };
+          });
+        });
+        boardJSON = JSON.stringify(boardClone);
       }
       catch (e) {
         d.reject(e);
@@ -205,17 +217,21 @@ angular.module('gib.services', [])
       var config = configAndIssues[0];
       var issues = configAndIssues[1];
 
+      // keep issues by id
       var issuesById = {};
       _.each(issues, function (issue) {
         issuesById[issue.id] = issue;
       });
 
+      // remember what issues occur in stations
       var issuesInStations = [];
       _.each(config.stations, function (station) {
 
         var updatedIssuesForStation = [];
         _.each(station.issues, function (issue) {
           issuesInStations.push(issue.id);
+
+          // update all stations' issues with content from github
           updatedIssuesForStation.push(issuesById[issue.id]);
         });
 
