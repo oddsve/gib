@@ -1,30 +1,39 @@
 <h1>{{repoName}}-board</h1>
 Search in issues: <input ng-model="searchText" type="text">
 <ul>
-  <li
-    class="station"
-    ng-repeat="station in stations">
+    <li class="station"
+        ng-repeat="station in stations">
 
-    {{station.name}}
+        {{station.name}}
 
-    <ul
-      class="issues"
-      data-json='{ "stationId": {{station.id}} }'
-      id="station-{{station.id}}">
+        <ul class="issues"
+            drop="ondrop"
+            data-json='{ "stationId": {{station.id}} }'
+            id="station-{{station.id}}">
 
-      <li
-        class="issue"
-        drop="ondrop"
-        ng-repeat="issue in station.issues | filter:searchText"
-        draggable droppable
-        data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "stationId": {{station.id}} }'
-        id="issue-{{issue.id}}">
+            <li class="issue"
+                drop="ondrop"
+                ng-repeat="issue in station.issues | filter:searchText"
+                draggable droppable
+                data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "stationId": {{station.id}} }'
+                id="issue-{{issue.id}}">
 
-        <div class="issue-content">
-            <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
-            <span class="issue-title">{{issue.title}}</span>
-        </div>
-      </li>
-    </ul>
-  </li>
+                <div class="issue-content">
+                    <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
+                    <span class="issue-title">{{issue.title}}</span>
+                </div>
+            </li>
+            <li class="issue"
+                drop="ondrop"
+                droppable
+                data-json='{ "id": "issue-{{issue.id}}", "issueId": 0, "stationId": {{station.id}} }'
+                id="issue-{{issue.id}}">
+
+                <div class="issue-content">
+                    <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
+                    <span class="issue-title">FLYTT HIT</span>
+                </div>
+            </li>
+        </ul>
+    </li>
 </ul>

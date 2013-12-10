@@ -25,18 +25,24 @@ angular.module('gib.controllers', [])
 
       $scope.stations = board.stations;
 
-      $scope.ondrop = function (fromElData , toElData) {
-        var stations = board.stations;
+      $scope.ondrop = function () {
+        var boardClone = JSON.parse(JSON.stringify(board));
 
-        var fromStation = _.findWhere(stations, { id: fromElData.stationId });
-        var issue = _.findWhere(fromStation.issues, { id: fromElData.issueId });
-        fromStation.issues = _.without(fromStation.issues, issue);
+        boardClone.stations.forEach (function(station){
+          var stationItem = document.getElementById("station-" + station.id);
+          var issues = Array.prototype.slice.call(stationItem.getElementsByTagName("li"));
+          station.issues = [];
+          issues.forEach(function(el){
+            var issueId = JSON.parse(el.getAttribute("data-json")).issueId;
+            if ( issueId != 0 ){
+              station.issues.push({"id" : issueId});
+            }
+          });
+        });
 
-        var toStation = stations[toElData.stationId];
-        toStation.issues.push(issue);
-
-        Gib.saveBoard(user, repo, board);
+        Gib.saveBoard(user, repo, boardClone);
       };
+
     });
 }]);
 
