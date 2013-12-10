@@ -9,20 +9,21 @@ Search in issues: <input ng-model="searchText" type="text">
 
     <ul
       class="issues"
-      droppable
-      drop="ondrop"
       data-json='{ "stationId": {{station.id}} }'
       id="station-{{station.id}}">
 
       <li
         class="issue"
+        drop="ondrop"
         ng-repeat="issue in station.issues | filter:searchText"
-        draggable
+        draggable droppable
         data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "stationId": {{station.id}} }'
         id="issue-{{issue.id}}">
 
-        <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
-        <span class="issue-title">{{issue.title}}</span>
+        <div class="issue-content">
+            <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
+            <span class="issue-title">{{issue.title}}</span>
+        </div>
       </li>
     </ul>
   </li>

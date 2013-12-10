@@ -80,9 +80,12 @@ angular.module('gib.dragdrop', [])
 
           var data = JSON.parse(e.dataTransfer.getData('json'));
           var item = document.getElementById(data.id);
-          this.appendChild(item);
+          var parent = this.parentElement;
+          parent.insertBefore(item,this);
 
-          var station = JSON.parse(this.dataset.json);
+          var station = JSON.parse(parent.dataset.json);
+
+          console.log(station);
 
           // call the passed drop function
           scope.$apply(function (scope) {
