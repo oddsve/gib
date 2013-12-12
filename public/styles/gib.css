@@ -3,7 +3,10 @@
 }
 
 .issue {
-    padding-top: .5em;
+    margin-top: .25em;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
 
 }
 
@@ -18,17 +21,16 @@
   margin-left: 2em;
 }
 
-.over {
-    padding-top: 2em;
+.over  {
+    padding: 2em 0 0 0 ;
 }
 
 .issue-content {
-
+    pointer-events: none;
     padding: 0.25em 0.5em;
     background-color: rgba(110, 220, 255, 0.2);
     border: 1px solid rgba(110, 220, 255, 0.5);
 
-    cursor: -webkit-grab;
-    cursor: -moz-grab;
-    cursor: grab;
+
 }
+

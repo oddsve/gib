@@ -43,11 +43,7 @@ angular.module('gib.dragdrop', [])
       el.addEventListener(
         'dragover',
         function (e) {
-          e.dataTransfer.dropEffect = 'move';
-          // allows us to drop
-          if (e.preventDefault) e.preventDefault();
-          this.classList.add('over');
-          return false;
+          e.preventDefault();
         },
         false
       );
@@ -55,7 +51,9 @@ angular.module('gib.dragdrop', [])
       el.addEventListener(
         'dragenter',
         function (e) {
+          e.dataTransfer.dropEffect = 'move';
           this.classList.add('over');
+          console.log("enter " +  e.target + " " +  e.target.id);
           return false;
         },
         false
@@ -65,6 +63,7 @@ angular.module('gib.dragdrop', [])
         'dragleave',
         function (e) {
           this.classList.remove('over');
+          console.log("leave " +  e.target + " " +  e.target.id);
           return false;
         },
         false
@@ -74,6 +73,7 @@ angular.module('gib.dragdrop', [])
         'drop',
         function (e) {
           // Stops some browsers from redirecting.
+          console.log("drop ");
           if (e.stopPropagation) e.stopPropagation();
 
           this.classList.remove('over');
@@ -81,9 +81,9 @@ angular.module('gib.dragdrop', [])
           var data = JSON.parse(e.dataTransfer.getData('json'));
           var item = document.getElementById(data.id);
 
-            var parent = this.parentElement;
-            parent.insertBefore(item,this);
-            var station = JSON.parse(parent.dataset.json);
+          var parent = this.parentElement;
+          parent.insertBefore(item,this);
+          var station = JSON.parse(parent.dataset.json);
 
           // call the passed drop function
           scope.$apply(function (scope) {

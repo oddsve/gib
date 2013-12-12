@@ -7,17 +7,15 @@ Search in issues: <input ng-model="searchText" type="text">
         {{station.name}}
 
         <ul class="issues"
-            drop="ondrop"
             data-json='{ "stationId": {{station.id}} }'
             id="station-{{station.id}}">
 
             <li class="issue"
-                drop="ondrop"
                 ng-repeat="issue in station.issues | filter:searchText"
+                drop="ondrop"
                 draggable droppable
                 data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "stationId": {{station.id}} }'
                 id="issue-{{issue.id}}">
-
                 <div class="issue-content">
                     <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
                     <span class="issue-title">{{issue.title}}</span>
@@ -28,11 +26,8 @@ Search in issues: <input ng-model="searchText" type="text">
                 droppable
                 data-json='{ "id": "issue-{{issue.id}}", "issueId": 0, "stationId": {{station.id}} }'
                 id="issue-{{issue.id}}">
-
-                <div class="issue-content">
-                    <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
-                    <span class="issue-title">FLYTT HIT</span>
-                </div>
+                <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
+                <span class="issue-title">FLYTT HIT</span>                </div>
             </li>
         </ul>
     </li>
