@@ -17,7 +17,7 @@ Search in issues: <input ng-model="searchText" type="text">
                 data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "stationId": {{station.id}} }'
                 id="issue-{{issue.id}}">
                 <div class="issue-content">
-                    <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
+                    <a href="{{issue.html_url}}" class="issue-number">#{{issue.number}}</a>
                     <span class="issue-title">{{issue.title}}</span>
                 </div>
             </li>

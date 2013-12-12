@@ -16,6 +16,7 @@
     position: absolute;
     color: grey;
     text-decoration: none;
+    pointer-events: auto;
 }
 
 .issue-title {
