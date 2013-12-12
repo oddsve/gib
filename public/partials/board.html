@@ -1,6 +1,6 @@
 <h1>{{repoName}}-board</h1>
 Search in issues: <input ng-model="searchText" type="text">
-<ul>
+<ul class="stations">
     <li class="station"
         ng-repeat="station in stations">
 
@@ -26,8 +26,10 @@ Search in issues: <input ng-model="searchText" type="text">
                 droppable
                 data-json='{ "id": "issue-{{issue.id}}", "issueId": 0, "stationId": {{station.id}} }'
                 id="issue-{{issue.id}}">
-                <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
-                <span class="issue-title">FLYTT HIT</span>                </div>
+                <div class="issue-content">
+                    <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
+                    <span class="issue-title">FLYTT HIT</span>                </div>
+                </div>
             </li>
         </ul>
     </li>
