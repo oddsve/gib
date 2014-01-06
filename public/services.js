@@ -248,7 +248,10 @@ angular.module('gib.services', [])
           issuesInStations.push(issue.id);
 
           // update all stations' issues with content from github
-          updatedIssuesForStation.push(issuesById[issue.id]);
+          // only if the issue is still open
+          if (issue.id in issuesById){
+            updatedIssuesForStation.push(issuesById[issue.id]);
+          }
         });
 
         station.issues = updatedIssuesForStation;
