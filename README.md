@@ -27,7 +27,7 @@ Create a new application with the following settings
 Set the client id and the client secret as environment variables in your `run` file
 
     github_clientid=CLIENT_ID_HERE \
-    github_clientsecret=CLIENT_SECRET_HERE\
+    github_clientsecret=CLIENT_SECRET_HERE \
     nodemon server.js
 
 Then do `chmod u+x run`
