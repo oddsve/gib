@@ -8,8 +8,26 @@ angular.module('gib.controllers', [])
       $location.path("/board/" + $scope.selectedRepo.full_name);
     };
 
+    $scope.organizationChanged = function () {
+      var promise;
+      if ($scope.selectedOrganization) {
+        promise = Github.orgRepos($scope.selectedOrganization.login);
+      } else {
+        promise = Github.repos();
+      }
+
+      promise.then(function (repos) {
+        $scope.repos = repos;
+      });
+
+    };
+
     Github.repos().then(function (repos) {
       $scope.repos = repos;
+    });
+
+    Github.organizations().then(function (organizations){
+      $scope.organizations = organizations;
     });
 }])
 

@@ -13,14 +13,13 @@
 }
 
 .issue-number {
-    position: absolute;
     color: grey;
     text-decoration: none;
     pointer-events: auto;
 }
 
 .issue-title {
-    margin-left: 2em;
+    margin-left: .2em;
 }
 
 .over  {
@@ -49,4 +48,12 @@
     padding: 0;
 }
 
+label {
+    float: left;
+    padding: .4em;
+}
+
+select {
+    display: block;
+}
 

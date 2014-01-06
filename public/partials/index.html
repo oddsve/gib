@@ -1,10 +1,20 @@
 <div>
 
-  <select ng-model="selectedRepo" ng-options="repo.name for repo in repos" >
-    <option value="">Select repo</option>
-  </select>
+    <label>
+        Select organisation
+        <select ng-change="organizationChanged()" ng-model="selectedOrganization" ng-options="organization.login for organization in organizations" >
+            <option value="">Select organisation</option>
+        </select>
+    </label>
+    <label>
+        <span ng-hide="selectedOrganization">or use one of your user repos</span>
+        <span ng-show="selectedOrganization">and pick a repo from {{selectedOrganization.login}}</span>
+        <select ng-model="selectedRepo" ng-options="repo.name for repo in repos" >
+            <option value="">Select repo</option>
+        </select>
+    </label>
 
-  <button ng-click="createBoardClicked()">Create board</button>
+    <button ng-click="createBoardClicked()">Open board</button>
 
 </div>
 

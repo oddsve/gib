@@ -28,6 +28,20 @@ angular.module('gib.services', [])
     return d.promise;
   }
 
+  function organizations() {
+    var d = $q.defer();
+    var user = github.getUser();
+    user.orgs(resolver(d));
+    return d.promise;
+  }
+
+  function orgRepos(orgName){
+    var d = $q.defer();
+    var user = github.getUser();
+    user.orgRepos(orgName, resolver(d));
+    return d.promise;
+  }
+
   function branches (repo) {
     console.log('list branches');
     var d = $q.defer();
@@ -64,6 +78,8 @@ angular.module('gib.services', [])
   return {
     repo: repo,
     repos: repos,
+    orgRepos: orgRepos,
+    organizations: organizations,
     branches: branches,
     createBranch: createBranch,
     read: read,
