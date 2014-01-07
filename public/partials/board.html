@@ -25,11 +25,13 @@
                     <div class="issue-content">
                         <a href="{{issue.html_url}}" class="issue-number">#{{issue.number}}</a>
                         <span class="issue-title">{{issue.title}}</span>
+                        <img ng-show="issue.assignee.avatar_url"  class="avatar" src="{{issue.assignee.avatar_url}}"/>
                         <ul class="issue-labels">
                             <li class="issue-label"
                                 ng-repeat="label in issue.labels"
-                                style="background-color: #{{label.color}}">{{label.name}}</li>
+                            style="background-color: #{{label.color}}">{{label.name}}</li>
                         </ul>
+
                     </div>
                 </li>
                 <li class="issue "
