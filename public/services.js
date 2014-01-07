@@ -137,7 +137,7 @@ angular.module('gib.services', [])
       return JSON.parse(JSON.stringify(obj));
     }
 
-    function saveBoard (user, repository, board) {
+    function saveBoard (user, repository, board, message) {
       var d = $q.defer();
 
       var boardClone,
@@ -159,7 +159,7 @@ angular.module('gib.services', [])
       var repo = Github.repo(user, repository);
 
       Github
-        .write(repo, BRANCH, CONFIG_FILE, boardJSON, nextCommit())
+        .write(repo, BRANCH, CONFIG_FILE, boardJSON, message)
         .then(d.resolve)
         .catch(d.reject);
 

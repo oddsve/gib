@@ -43,8 +43,9 @@ angular.module('gib.controllers', [])
 
       $scope.stations = board.stations;
 
-      $scope.ondrop = function () {
+      $scope.ondrop = function (droppedIssue, fromStation) {
         var boardClone = JSON.parse(JSON.stringify(board));
+        var message;
 
         boardClone.stations.forEach (function(station){
           var issues = document.querySelectorAll("#station-" + station.id + " .issue");
@@ -52,13 +53,20 @@ angular.module('gib.controllers', [])
           station.issues = [];
           issues.forEach(function(el){
             var issueId = JSON.parse(el.getAttribute("data-json")).issueId;
+            if (issueId == droppedIssue.id ) {
+              if (fromStation.name == station.name){
+                message = "Issue number " + droppedIssue.number + " is reprioritized in " + station.name
+              } else {
+                message = "Issue number " + droppedIssue.number + " moved to " + station.name;
+              }
+            }
             if ( issueId != 0 ){
               station.issues.push({"id" : issueId});
             }
           });
         });
 
-        Gib.saveBoard(user, repo, boardClone);
+        Gib.saveBoard(user, repo, boardClone, message);
       };
 
     });

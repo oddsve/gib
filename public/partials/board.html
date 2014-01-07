@@ -16,7 +16,7 @@
 
             <li class="issue"
                 ng-repeat="issue in station.issues | filter:searchText"
-                drop="ondrop"
+                drop="ondrop(issue, station)"
                 draggable droppable
                 data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "stationId": {{station.id}} }'
                 id="issue-{{issue.id}}">
