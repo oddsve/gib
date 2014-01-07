@@ -55,7 +55,7 @@ angular.module('gib.controllers', [])
             var issueId = JSON.parse(el.getAttribute("data-json")).issueId;
             if (issueId == droppedIssue.id ) {
               if (fromStation.name == station.name){
-                message = "Issue number " + droppedIssue.number + " is reprioritized in " + station.name
+                message = "Issue number " + droppedIssue.number + " is reprioritized in " + station.name;
               } else {
                 message = "Issue number " + droppedIssue.number + " moved to " + station.name;
               }
