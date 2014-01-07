@@ -53,7 +53,6 @@ angular.module('gib.dragdrop', [])
         function (e) {
           e.dataTransfer.dropEffect = 'move';
           this.classList.add('over');
-          console.log("enter " +  e.target + " " +  e.target.id);
           return false;
         },
         false
@@ -63,7 +62,6 @@ angular.module('gib.dragdrop', [])
         'dragleave',
         function (e) {
           this.classList.remove('over');
-          console.log("leave " +  e.target + " " +  e.target.id);
           return false;
         },
         false

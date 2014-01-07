@@ -13,14 +13,14 @@
             <h2>{{station.name}}</h2>
 
             <ul class="issues"
-                data-json='{ "stationId": {{station.id}} }'
+                data-json='{ "stationId": {{station.id}}, "name": "{{station.name}}" }'
                 id="station-{{station.id}}">
 
                 <li class="issue"
                     ng-repeat="issue in station.issues | filter:searchText"
-                    drop="ondrop(issue, station)"
+                    drop="ondrop"
                     draggable droppable
-                    data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "stationId": {{station.id}} }'
+                    data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "number": {{issue.number}}, "stationId": {{station.id}} }'
                     id="issue-{{issue.id}}">
                     <div class="issue-content">
                         <a href="{{issue.html_url}}" class="issue-number">#{{issue.number}}</a>

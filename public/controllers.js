@@ -43,9 +43,23 @@ angular.module('gib.controllers', [])
 
       $scope.stations = board.stations;
 
-      $scope.ondrop = function (droppedIssue, fromStation) {
+      $scope.ondrop = function (droppedIssue, toStation) {
         var boardClone = JSON.parse(JSON.stringify(board));
         var message;
+
+        if (toStation.stationId == droppedIssue.stationId){
+          message = ":arrows_counterclockwise: " + toStation.name + " is  reprioritized in.";
+        } else {
+            var direction;
+            if (toStation.stationId > droppedIssue.stationId){
+              direction = ":arrow_right:";
+            } else {
+              direction = ":arrow_left:";
+            }
+
+          message = direction + " Issue number " + droppedIssue.number + " moved to " + toStation.name;
+        }
+
 
         boardClone.stations.forEach (function(station){
           var issues = document.querySelectorAll("#station-" + station.id + " .issue");
@@ -53,13 +67,6 @@ angular.module('gib.controllers', [])
           station.issues = [];
           issues.forEach(function(el){
             var issueId = JSON.parse(el.getAttribute("data-json")).issueId;
-            if (issueId == droppedIssue.issueId ) {
-              if (fromStation.name == station.name){
-                message = "Issue number " + droppedIssue.number + " is reprioritized in " + station.name;
-              } else {
-                message = "Issue number " + droppedIssue.number + " moved to " + station.name;
-              }
-            }
             if ( issueId != 0 ){
               station.issues.push({"id" : issueId});
             }
