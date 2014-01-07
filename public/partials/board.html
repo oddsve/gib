@@ -26,14 +26,14 @@ Search in issues: <input ng-model="searchText" type="text">
                     </ul>
                 </div>
             </li>
-            <li class="issue"
+            <li class="issue "
                 drop="ondrop"
                 droppable
                 data-json='{ "id": "issue-{{issue.id}}", "issueId": 0, "stationId": {{station.id}} }'
                 id="issue-{{issue.id}}">
-                <div class="issue-content">
-                    <a href="{{issue.url}}" class="issue-number">#{{issue.number}}</a>
-                    <span class="issue-title">FLYTT HIT</span>                </div>
+                <div class="issue-content issue-placeholder">
+                    <a href="{{issue.url}}" class="issue-number"></a>
+                    <span class="issue-title"></span>                </div>
                 </div>
             </li>
         </ul>
