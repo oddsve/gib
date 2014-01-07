@@ -1,6 +1,6 @@
 body {
     background-color: #223333;
-    background-image: url("/images/background.jpeg");
+    background-image: url("/images/background.png");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100% auto;
@@ -29,7 +29,6 @@ h2 {
     position: absolute;
     right: 10%;
     top: 1em;
-
 }
 
 a {
@@ -40,11 +39,12 @@ a:visited {
     color: #ffffff;
 }
 
+
 .issues {
   padding: 0;
-    margin: 0;
-    list-style-type: none;
-    list-style-position: inside;
+  margin: 0;
+  list-style-type: none;
+  list-style-position: inside;
 }
 
 .issue {
@@ -75,6 +75,7 @@ a:visited {
     background-color: rgba(110, 220, 255, 0.2);
     border: 1px solid rgba(110, 220, 255, 0.5);
     margin: 0.3em ;
+    margin: 0.3em ;
 }
 
 .issue-placeholder {
@@ -87,7 +88,10 @@ a:visited {
     list-style-type: none;
     list-style-position: inside;
     margin: 0 0 0 .3em;
+    margin: 0 0 0 .3em;
     padding: 0;
+    background-color: rgba(110, 120, 155, 0.5);
+    border: 1px solid rgba(110, 120, 155, 0.5);
     background-color: rgba(110, 120, 155, 0.5);
     border: 1px solid rgba(110, 120, 155, 0.5);
 }
