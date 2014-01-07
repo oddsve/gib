@@ -47,8 +47,8 @@ angular.module('gib.controllers', [])
         var boardClone = JSON.parse(JSON.stringify(board));
 
         boardClone.stations.forEach (function(station){
-          var stationItem = document.getElementById("station-" + station.id);
-          var issues = Array.prototype.slice.call(stationItem.getElementsByTagName("li"));
+          var issues = document.querySelectorAll("#station-" + station.id + " .issue");
+          issues = Array.prototype.slice.call(issues);
           station.issues = [];
           issues.forEach(function(el){
             var issueId = JSON.parse(el.getAttribute("data-json")).issueId;

@@ -19,6 +19,11 @@ Search in issues: <input ng-model="searchText" type="text">
                 <div class="issue-content">
                     <a href="{{issue.html_url}}" class="issue-number">#{{issue.number}}</a>
                     <span class="issue-title">{{issue.title}}</span>
+                    <ul class="issue-labels">
+                        <li class="issue-label"
+                            ng-repeat="label in issue.labels"
+                            style="background-color: #{{label.color}}">{{label.name}}</li>
+                    </ul>
                 </div>
             </li>
             <li class="issue"

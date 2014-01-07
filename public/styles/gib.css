@@ -6,6 +6,7 @@
 }
 
 .issue {
+    transition: padding 0.4s;
     margin-top: .25em;
     cursor: -webkit-grab;
     cursor: -moz-grab;
@@ -57,3 +58,18 @@ select {
     display: block;
 }
 
+
+.issue-labels {
+    margin: 0;
+    padding: 0;
+}
+
+.issue-label {
+    font-size: 0.7em;
+    color: #ffffff;
+    list-style-type: none;
+    display: inline-block;
+    border-radius: .3em;
+    padding: .3em .5em;
+    margin-left: .2em;
+}
