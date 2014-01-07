@@ -1,12 +1,12 @@
 <div>
 
-    <label>
+    <label class="dropdown-label">
         Select organisation
         <select ng-change="organizationChanged()" ng-model="selectedOrganization" ng-options="organization.login for organization in organizations" >
             <option value="">Select organisation</option>
         </select>
     </label>
-    <label>
+    <label class="dropdown-label">
         <span ng-hide="selectedOrganization">or use one of your user repos</span>
         <span ng-show="selectedOrganization">and pick a repo from {{selectedOrganization.login}}</span>
         <select ng-model="selectedRepo" ng-options="repo.name for repo in repos" >
