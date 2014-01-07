@@ -5,41 +5,44 @@
     </label>
 </div>
 <ul class="stations">
-    <li class="station"
-        ng-repeat="station in stations">
+    <div ng-repeat="station in stations" class="station-wrapper">
 
-        <h2>{{station.name}}</h2>
+        <li class="station">
 
-        <ul class="issues"
-            data-json='{ "stationId": {{station.id}} }'
-            id="station-{{station.id}}">
 
-            <li class="issue"
-                ng-repeat="issue in station.issues | filter:searchText"
-                drop="ondrop(issue, station)"
-                draggable droppable
-                data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "stationId": {{station.id}} }'
-                id="issue-{{issue.id}}">
-                <div class="issue-content">
-                    <a href="{{issue.html_url}}" class="issue-number">#{{issue.number}}</a>
-                    <span class="issue-title">{{issue.title}}</span>
-                    <ul class="issue-labels">
-                        <li class="issue-label"
-                            ng-repeat="label in issue.labels"
-                            style="background-color: #{{label.color}}">{{label.name}}</li>
-                    </ul>
-                </div>
-            </li>
-            <li class="issue "
-                drop="ondrop"
-                droppable
-                data-json='{ "id": "issue-{{issue.id}}", "issueId": 0, "stationId": {{station.id}} }'
-                id="issue-{{issue.id}}">
-                <div class="issue-content issue-placeholder">
-                    <a href="{{issue.url}}" class="issue-number"></a>
-                    <span class="issue-title"></span>                </div>
-                </div>
-            </li>
-        </ul>
-    </li>
+            <h2>{{station.name}}</h2>
+
+            <ul class="issues"
+                data-json='{ "stationId": {{station.id}} }'
+                id="station-{{station.id}}">
+
+                <li class="issue"
+                    ng-repeat="issue in station.issues | filter:searchText"
+                    drop="ondrop(issue, station)"
+                    draggable droppable
+                    data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "stationId": {{station.id}} }'
+                    id="issue-{{issue.id}}">
+                    <div class="issue-content">
+                        <a href="{{issue.html_url}}" class="issue-number">#{{issue.number}}</a>
+                        <span class="issue-title">{{issue.title}}</span>
+                        <ul class="issue-labels">
+                            <li class="issue-label"
+                                ng-repeat="label in issue.labels"
+                                style="background-color: #{{label.color}}">{{label.name}}</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="issue "
+                    drop="ondrop"
+                    droppable
+                    data-json='{ "id": "issue-{{issue.id}}", "issueId": 0, "stationId": {{station.id}} }'
+                    id="issue-{{issue.id}}">
+                    <div class="issue-content issue-placeholder">
+                        <a href="{{issue.url}}" class="issue-number"></a>
+                        <span class="issue-title"></span>                </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </div>
 </ul>
