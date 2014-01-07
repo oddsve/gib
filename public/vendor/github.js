@@ -719,7 +719,7 @@
       var path = "/repos/" + options.user + "/" + options.repo + "/issues";
 
       this.list = function(options, cb) {
-        _request("GET", path, options, function(err, res) {
+        _requestAllPages( path, function(err, res) {
           cb(err,res)
         });
       };
