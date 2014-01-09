@@ -48,7 +48,7 @@ angular.module('gib.controllers', [])
         var message;
 
         if (toStation.stationId == droppedIssue.stationId){
-          message = ":arrows_counterclockwise: " + toStation.name + " is  reprioritized in.";
+          message = ":arrows_counterclockwise: " + toStation.name + " is  reprioritized.";
         } else {
             var direction;
             if (toStation.stationId > droppedIssue.stationId){
