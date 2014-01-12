@@ -4,11 +4,11 @@
         <input ng-model="searchText" type="text">
     </label>
 </div>
+
 <ul class="stations">
-    <div ng-repeat="station in stations" class="station-wrapper">
+    <li ng-repeat="station in stations" class="station-wrapper">
 
-        <li class="station">
-
+        <div class="station">
 
             <h2>{{station.name}}</h2>
 
@@ -23,9 +23,9 @@
                     data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "number": {{issue.number}}, "stationId": {{station.id}} }'
                     id="issue-{{issue.id}}">
                     <div class="issue-content">
+                        <img ng-show="issue.assignee.avatar_url" class="issue-avatar" ng-src="{{issue.assignee.avatar_url}}"/>
                         <a href="{{issue.html_url}}" class="issue-number">#{{issue.number}}</a>
                         <span class="issue-title">{{issue.title}}</span>
-                        <img ng-show="issue.assignee.avatar_url"  class="avatar" ng-src="{{issue.assignee.avatar_url}}"/>
                         <ul class="issue-labels">
                             <li class="issue-label"
                                 ng-repeat="label in issue.labels"
@@ -41,10 +41,10 @@
                     id="issue-{{issue.id}}">
                     <div class="issue-content issue-placeholder">
                         <a href="{{issue.url}}" class="issue-number"></a>
-                        <span class="issue-title"></span>                </div>
+                        <span class="issue-title"></span>
                     </div>
                 </li>
             </ul>
-        </li>
-    </div>
+        </div>
+    </li>
 </ul>
