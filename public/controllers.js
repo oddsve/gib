@@ -38,10 +38,19 @@ angular.module('gib.controllers', [])
     var repo = $scope.repoName = $routeParams.repo;
     var user = $routeParams.user;
 
+    $scope.onCloseClick = function(){
+      $scope.selectedIssue = null;
+    }
+
+    $scope.onClick = function(issue){
+      $scope.selectedIssue = issue;
+    }
+
     Gib.findOrCreateBoard(user, repo)
        .then(function (board) {
 
       $scope.stations = board.stations;
+
 
       $scope.ondrop = function (droppedIssue, toStation) {
         var boardClone = JSON.parse(JSON.stringify(board));

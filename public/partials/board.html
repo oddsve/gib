@@ -16,13 +16,13 @@
                 data-json='{ "stationId": {{station.id}}, "name": "{{station.name}}" }'
                 id="station-{{station.id}}">
 
-                <li class="issue"
+                <li class="issue" ng-click="onClick(issue)"
                     ng-repeat="issue in station.issues | filter:searchText"
                     drop="ondrop"
                     draggable droppable
                     data-json='{ "id": "issue-{{issue.id}}", "issueId": {{issue.id}}, "number": {{issue.number}}, "stationId": {{station.id}} }'
                     id="issue-{{issue.id}}">
-                    <div class="issue-content">
+                    <div class="issue-content" >
                         <img ng-show="issue.assignee.avatar_url" class="issue-avatar" ng-src="{{issue.assignee.avatar_url}}"/>
                         <a href="{{issue.html_url}}" target="_blank"  class="issue-number">#{{issue.number}}</a>
                         <span class="issue-title">{{issue.title}}</span>
@@ -48,3 +48,14 @@
         </div>
     </li>
 </ul>
+
+<div ng-show="selectedIssue" class="selected-issue">
+    <img ng-click="onCloseClick()" class="icon" src="/images/close.png"/>
+    <a href="{{selectedIssue.html_url}}" target="_blank">
+        <h3 class="title">{{selectedIssue.title}}</h3>
+    </a>
+    <div class="body">
+        {{selectedIssue.body}}
+    </div>
+</div>
+

@@ -8,7 +8,7 @@ body {
     background-repeat: no-repeat;
     background-size: 100% auto;
     color: #ffffff;
-    font-family: "Verdana";
+    font-family: "Verdana" ;
 }
 
 h1 {
@@ -23,6 +23,13 @@ h2 {
     text-align: center;
     text-transform: capitalize;
 }
+
+h3 {
+    font-size: 1.3em;
+    font-weight: normal;
+    margin: 0 0 1em 0;
+}
+
 
 .search-box {
     position: absolute;
@@ -79,7 +86,6 @@ a:visited {
     background-color: rgba(110, 220, 255, 0.2);
     border: 1px solid rgba(110, 220, 255, 0.5);
     margin: 0.3em;
-    margin: 0.3em;
 }
 
 .issue-placeholder {
@@ -104,10 +110,7 @@ a:visited {
     list-style-type: none;
     list-style-position: inside;
     margin: 0 0 0 .3em;
-    margin: 0 0 0 .3em;
     padding: 0;
-    background-color: rgba(110, 120, 155, 0.5);
-    border: 1px solid rgba(110, 120, 155, 0.5);
     background-color: rgba(110, 120, 155, 0.5);
     border: 1px solid rgba(110, 120, 155, 0.5);
 }
@@ -142,4 +145,28 @@ select {
     border-radius: .3em;
     float: right;
     height: 1.6em;
+}
+
+.selected-issue{
+    position: absolute;
+    width: 50%;
+    left: 25%;
+    top: 25%;
+    max-height: 70%;
+    overflow: scroll;
+    background-color: #ffffff;
+    padding: 1em;
+    color: #000000;
+}
+
+.selected-issue a, .selected-issue a {
+    color: #000000;
+    text-decoration: none;
+}
+
+
+.icon {
+    height: 2em;
+    float: right;
+    cursor: pointer;
 }
