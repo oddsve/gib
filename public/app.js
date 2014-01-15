@@ -1,5 +1,6 @@
 var app = angular.module('gib', [
   'ngRoute',
+  'ngDialog',
   'gib.dragdrop',
   'gib.services',
   'gib.controllers'
