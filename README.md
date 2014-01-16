@@ -5,10 +5,11 @@ gib [![Build Status](https://travis-ci.org/oddsve/gib.png?branch=master)](https:
 
 - node.js >= 0.10
 - nodemon
+- gulp
 
-Install nodemon like this
+Install nodemon and gulp like this
 
-    npm install -g nodemon
+    npm install -g nodemon gulp
 
 ### setup
 
@@ -35,7 +36,9 @@ Then do `chmod u+x run`
 ### run
 
     npm install
-    ./run
+    gulp run
+
+Server changes respawns the process, less changes automatically reloads
 
 ### deploy
 

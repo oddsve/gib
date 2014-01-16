@@ -1,0 +1,214 @@
+.ignore-padding() {
+  box-sizing: border-box;
+}
+
+.cursor(@style) {
+  cursor: -webkit-@style;
+  cursor: -moz-@style;
+  cursor: @style;
+}
+
+.wrap() {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+
+
+
+html, body {
+  .ignore-padding;
+}
+
+body {
+  background-color: #223333;
+  background-image: url("/images/background.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  color: white;
+  font-family: verdana;
+  overflow-y: scroll;
+}
+
+pre {
+  font-family: verdana;
+  font-size: 0.9em;
+  .wrap;
+}
+
+h1 {
+  font-size: 1.5em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.3em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+h3 {
+  font-size: 1.3em;
+  font-weight: normal;
+  margin: 0 0 1em 0;
+}
+
+
+
+
+
+.search-box {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+}
+
+.home-link {
+  position: absolute;
+  left: 1em;
+  top: 1em;
+  text-decoration: none;
+}
+
+a,
+a:visited {
+  color: white;
+}
+
+
+
+
+
+.issues {
+  padding: 0 0.3em;
+  margin: 0;
+  margin-bottom: 0.3em;
+  list-style: none;
+  flex: 1;
+}
+
+.issue {
+  transition: padding 0.3s;
+  margin-top: .25em;
+  .cursor(grab);
+}
+
+.issue-number {
+  text-decoration: none;
+  pointer-events: auto;
+}
+
+.issue-title {
+  margin-left: .2em;
+  cursor: pointer;
+}
+
+.issue-content {
+  pointer-events: none;
+  padding: 0.25em 0.5em;
+  background-color: rgba(110, 220, 255, 0.2);
+  border: 1px solid rgba(110, 220, 255, 0.5);
+  line-height: 1.2em;
+}
+
+.issue-placeholder {
+  border: 2px dashed rgba(110, 220, 255, 0.5);
+}
+
+.issue-labels {
+  margin: 0;
+  padding: 0;
+}
+
+.issue-label {
+  font-size: 0.7em;
+  color: #ffffff;
+  list-style-type: none;
+  display: inline-block;
+  border-radius: .3em;
+  padding: .3em .5em;
+  margin-left: .2em;
+}
+
+.issue-avatar {
+  border-radius: .3em;
+  float: right;
+  height: 1.2em;
+}
+
+.issue.over,
+.issues.over li:last-child {
+  padding: 2em 0 0 0;
+}
+
+
+
+
+.station-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0 0 0 .3em;
+  padding: 0;
+  background-color: rgba(110, 120, 155, 0.5);
+  border: 1px solid rgba(110, 120, 155, 0.5);
+}
+
+.stations {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.station {
+  width: 33%;
+  flex: 1;
+  display: flex;
+}
+
+
+
+
+.dropdown-label {
+  float: left;
+  padding: .4em;
+}
+
+select {
+  display: block;
+}
+
+
+
+
+.selected-issue {
+  color: #000000;
+}
+
+.selected-issue a,
+.selected-issue a:visited {
+  text-decoration: none;
+  color: #000000;
+}
+
+
+
+
+.ngdialog.selected-issue .ngdialog-content {
+  width: 80%;
+  max-width: 50em;
+  max-height: 80%;
+  overflow-y: scroll;
+}
+
+body.ngdialog-open {
+  overflow-y: scroll;
+}

@@ -71,7 +71,6 @@ angular.module('gib.dragdrop', [])
         'drop',
         function (e) {
           // Stops some browsers from redirecting.
-          console.log("drop ");
           if (e.stopPropagation) e.stopPropagation();
 
           this.classList.remove('over');
@@ -79,9 +78,21 @@ angular.module('gib.dragdrop', [])
           var data = JSON.parse(e.dataTransfer.getData('json'));
           var item = document.getElementById(data.id);
 
-          var parent = this.parentElement;
-          parent.insertBefore(item,this);
-          var station = JSON.parse(parent.dataset.json);
+          var dropEl;
+
+          // dropped on ul, below last element
+          if (this.tagName.toLowerCase() == 'ul') {
+            dropEl = this;
+            var lastChild = this.children[this.children.length - 1];
+            dropEl.insertBefore(item, lastChild);
+          }
+          // droped on li, reordering
+          else {
+            var dropEl = this.parentElement;
+            dropEl.insertBefore(item, this);
+          }
+
+          var station = JSON.parse(dropEl.dataset.json);
 
           // call the passed drop function
           scope.$apply(function (scope) {

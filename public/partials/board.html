@@ -6,17 +6,20 @@
 </div>
 
 <ul class="stations">
-    <li ng-repeat="station in stations" class="station-wrapper">
+    <li ng-repeat="station in stations" class="station">
 
-        <div class="station">
+        <div class="station-wrapper">
 
             <h2>{{station.name}}</h2>
 
             <ul class="issues"
+                id="station-{{station.id}}"
                 data-json='{ "stationId": {{station.id}}, "name": "{{station.name}}" }'
-                id="station-{{station.id}}">
+                drop="ondrop"
+                droppable>
 
-                <li class="issue" ng-click="onClick(issue)"
+                <li class="issue"
+                    ng-click="onClick(issue)"
                     ng-repeat="issue in station.issues | filter:searchText"
                     drop="ondrop"
                     draggable droppable
@@ -34,7 +37,7 @@
 
                     </div>
                 </li>
-                <li class="issue "
+                <li class="issue"
                     drop="ondrop"
                     droppable
                     data-json='{ "id": "issue-{{issue.id}}", "issueId": 0, "stationId": {{station.id}} }'

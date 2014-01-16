@@ -1,9 +1,9 @@
-
 <h3 class="title">
   <a href="{{selectedIssue.html_url}}" target="_blank">
     {{selectedIssue.title}}
   </a>
 </h3>
+<img ng-show="selectedIssue.assignee.avatar_url" class="issue-avatar" ng-src="{{selectedIssue.assignee.avatar_url}}"/>
 <div class="body">
   <pre>
     {{selectedIssue.body}}

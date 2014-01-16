@@ -6,7 +6,7 @@
 
     <link href="styles/ng-dialog.css" rel="stylesheet">
     <link href="styles/ng-dialog-theme-default.css" rel="stylesheet">
-    <link href="styles/gib.css" rel="stylesheet">
+    <link href="resources/gib.css" rel="stylesheet">
 
     <script src="install.js"></script>
   </head>
@@ -27,5 +27,12 @@
     <script src="services.js"></script>
     <script src="controllers.js"></script>
     <script src="app.js"></script>
+
+    <script>
+      ~(location.href.indexOf('localhost') && document.write(
+        '<script src="//'+location.hostname+
+        ':35729/livereload.js?snipver=1"></script'+
+        '>'));
+    </script>
   </body>
 </html>

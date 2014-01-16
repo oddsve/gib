@@ -74,15 +74,14 @@ angular.module('gib.controllers', [ 'ngDialog' ])
           message = direction + " Issue number " + droppedIssue.number + " moved to " + toStation.name;
         }
 
-
-        boardClone.stations.forEach (function(station){
+        boardClone.stations.forEach (function (station){
           var issues = document.querySelectorAll("#station-" + station.id + " .issue");
           issues = Array.prototype.slice.call(issues);
           station.issues = [];
           issues.forEach(function(el){
             var issueId = JSON.parse(el.getAttribute("data-json")).issueId;
-            if ( issueId != 0 ){
-              station.issues.push({"id" : issueId});
+            if (issueId != 0){
+              station.issues.push({ id : issueId });
             }
           });
         });
