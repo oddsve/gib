@@ -29,10 +29,9 @@
     <script src="app.js"></script>
 
     <script>
-      ~(location.href.indexOf('localhost') && document.write(
-        '<script src="//'+location.hostname+
-        ':35729/livereload.js?snipver=1"></script'+
-        '>'));
+      if (~location.href.indexOf('localhost'))
+        document.write('<script src="//'+location.hostname+
+          ':35729/livereload.js?snipver=1"></script'+'>');
     </script>
   </body>
 </html>
