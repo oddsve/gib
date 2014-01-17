@@ -38,18 +38,18 @@ angular.module('gib.controllers', [ 'ngDialog' ])
     var repo = $scope.repoName = $routeParams.repo;
     var user = $routeParams.user;
 
-    $scope.onCloseClick = function(){
+    $scope.onCloseClick = function () {
       $scope.selectedIssue = null;
-    }
+    };
 
-    $scope.onClick = function(issue){
+    $scope.onClick = function (issue) {
       $scope.selectedIssue = issue;
       ngDialog.open({
         template: 'partials/issue-popup.html',
         className: 'selected-issue ngdialog-theme-default',
         scope: $scope
       });
-    }
+    };
 
     Gib.findOrCreateBoard(user, repo)
        .then(function (board) {
@@ -78,9 +78,9 @@ angular.module('gib.controllers', [ 'ngDialog' ])
           var issues = document.querySelectorAll("#station-" + station.id + " .issue");
           issues = Array.prototype.slice.call(issues);
           station.issues = [];
-          issues.forEach(function(el){
+          issues.forEach(function (el) {
             var issueId = JSON.parse(el.getAttribute("data-json")).issueId;
-            if (issueId != 0){
+            if (issueId !== 0) {
               station.issues.push({ id : issueId });
             }
           });

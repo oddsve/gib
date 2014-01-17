@@ -13,12 +13,12 @@ angular.module('gib.services', [])
     };
   }
 
-  function repo (user, repo) {
-    return github.getRepo(user, repo);
+  function repo (user, repository) {
+    return github.getRepo(user, repository);
   }
 
-  function issues (user, repo) {
-    return github.getIssues(user, repo);
+  function issues (user, repository) {
+    return github.getIssues(user, repository);
   }
 
   function repos () {
@@ -144,7 +144,7 @@ angular.module('gib.services', [])
           boardJSON;
       try {
         // todo clean up
-        var boardClone = clone(board);
+        boardClone = clone(board);
         _.each(boardClone.stations, function (station) {
           station.issues = station.issues.map(function (issue) {
             return { id: issue.id };
@@ -183,7 +183,7 @@ angular.module('gib.services', [])
         }
 
         return d.promise;
-      }
+      };
     }
 
     function readOrCreateConfig (repo) {
@@ -203,7 +203,7 @@ angular.module('gib.services', [])
           });
 
         return d.promise;
-      }
+      };
     }
 
     function createConfig (repo) {

@@ -27,7 +27,7 @@ angular.module('gib.dragdrop', [])
       },
       false
     );
-  }
+  };
 })
 
 .directive('droppable', function () {
@@ -78,17 +78,17 @@ angular.module('gib.dragdrop', [])
           var data = JSON.parse(e.dataTransfer.getData('json'));
           var item = document.getElementById(data.id);
 
-          var dropEl;
+          var dropEl, lastChild;
 
           // dropped on ul, below last element
           if (this.tagName.toLowerCase() == 'ul') {
             dropEl = this;
-            var lastChild = this.children[this.children.length - 1];
+            lastChild = this.children[this.children.length - 1];
             dropEl.insertBefore(item, lastChild);
           }
           // droped on li, reordering
           else {
-            var dropEl = this.parentElement;
+            dropEl = this.parentElement;
             dropEl.insertBefore(item, this);
           }
 
@@ -107,5 +107,5 @@ angular.module('gib.dragdrop', [])
         false
       );
     }
-  }
+  };
 });

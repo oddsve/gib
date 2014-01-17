@@ -4,27 +4,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>gib</title>
 
-    <link href="resources/gib.css" rel="stylesheet">
-
-    <script src="install.js"></script>
+    <% for (var i = 0; i < css.length; i++) { %>
+      <link href="<%= css[i] %>" rel="stylesheet">
+    <% } %>
+    <script src="js/install.js"></script>
   </head>
   <body>
     <a class="home-link" href="#/">gib</a>
 
     <div ng-view></div>
 
-    <script src="vendor/underscore.js"></script>
+    <script src="js/vendor/underscore.js"></script>
 
-    <script src="vendor/angular.js"></script>
-    <script src="vendor/angular-route.js"></script>
-    <script src="vendor/ng-dialog.js"></script>
+    <script src="js/vendor/angular.js"></script>
+    <script src="js/vendor/angular-route.js"></script>
+    <script src="js/vendor/ng-dialog.js"></script>
 
-    <script src="vendor/github.js"></script>
+    <script src="js/vendor/github.js"></script>
 
-    <script src="dragdrop.js"></script>
-    <script src="services.js"></script>
-    <script src="controllers.js"></script>
-    <script src="app.js"></script>
+    <script src="js/dragdrop.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/app.js"></script>
 
     <script>
       if (~location.href.indexOf('localhost'))
