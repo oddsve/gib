@@ -1,0 +1,63 @@
+.issues {
+  padding: 0 0.3em;
+  margin: 0;
+  margin-bottom: 0.3em;
+  list-style: none;
+  flex: 1;
+}
+
+.issue {
+  transition: padding 0.3s;
+  margin-top: .25em;
+  .cursor(grab);
+}
+
+.issue-number {
+  text-decoration: none;
+  pointer-events: auto;
+}
+
+.issue-title {
+  margin-left: .2em;
+  cursor: pointer;
+}
+
+.issue-content {
+  pointer-events: none;
+  padding: 0.25em 0.5em;
+  background-color: rgba(110, 220, 255, 0.2);
+  border: 1px solid rgba(110, 220, 255, 0.5);
+  line-height: 1.2em;
+  word-wrap: break-word;
+}
+
+.issue-placeholder {
+  border: 2px dashed rgba(110, 220, 255, 0.5);
+}
+
+.issue-labels {
+  margin: 0;
+  padding: 0;
+}
+
+.issue-label {
+  font-size: 0.7em;
+  color: #ffffff;
+  list-style-type: none;
+  display: inline-block;
+  border-radius: .3em;
+  padding: .3em .5em;
+  margin-left: .2em;
+}
+
+.issue-avatar {
+  border-radius: .3em;
+  float: right;
+  height: 1.2em;
+}
+
+.issue.over,
+.issues.over li:last-child {
+  padding: 2em 0 0 0;
+}
+
