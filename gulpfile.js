@@ -51,8 +51,12 @@ task('run', function () {
 });
 
 task('less', function () {
-  var task = glob('public/styles/gib.less')
+  var task = glob([
+    'public/styles/vendor/*.css',
+    'public/styles/gib.less',
+    ])
     .pipe(less())
+    .pipe(concat('gib.css'))
     .pipe(rev())
     .pipe(dest('public/resources'))
     .pipe(livereload(lr));
@@ -61,6 +65,11 @@ task('less', function () {
     lessDone.emit('done');
   });
 });
+
+task('css', function () {
+  glob('public/resources/**.css')
+    .pipe(concat())
+})
 
 task('clean', function () {
   glob('public/resources*')
