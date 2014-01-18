@@ -15,7 +15,8 @@ app.use(app.router);
 app.use(express.static(__dirname + '/public'));
 
 function withoutBase (file) { return file.replace('public/', ''); }
-var css = glob.sync('public/resources/gib-*.css').map(withoutBase);
+var css = glob.sync('public/resources/gib*').map(withoutBase);
+console.log(css);
 
 app.get('/', function (req, res) {
   res.render('index.html', { css: css });

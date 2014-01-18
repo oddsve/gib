@@ -3,10 +3,14 @@ var gulp = require('gulp'),
     minifyCss = require('gulp-minify-css'),
     jshint = require('gulp-jshint'),
     filter = require('gulp-filter'),
+    ignore = require('gulp-ignore'),
     concat = require('gulp-concat'),
     rimraf = require('gulp-rimraf'),
     debug = require('gulp-debug'),
-    rev = require("gulp-rev"),
+    rev = require('gulp-rev'),
+    es = require('event-stream'),
+    gulpif = require('gulp-if'),
+    uglify = require('gulp-uglify'),
 
     livereload = require('gulp-livereload'),
     http = require('http'),
@@ -23,61 +27,62 @@ var task  = gulp.task.bind(gulp),
     watch = gulp.watch.bind(gulp);
 
 task('default', function () {
-  run('lint');
   run('clean');
-  run('less');
+  run('lint');
+  run('compile-less');
+  run('minify');
 });
 
 var lr = tinylr();
 
-var lessDone = new process.EventEmitter();
-
 task('run', function () {
-  run('default');
 
   // start live reload server
   lr.listen(35729);
 
   // compile less on file changes
-  watch('**.less', function () {
-    run('clean');
-    run('less');
+  watch('**/*.less', function () {
+    run('clean', 'compile-less');
   });
 
-  lessDone.on('done', function () {
-    run('nodemon');
-    run('browser');
-  });
+  run('clean', 'lint', 'compile-less');
+  run('nodemon');
 });
 
-task('less', function () {
-  var task = glob([
-    'public/styles/vendor/*.css',
-    'public/styles/gib.less',
+task('compile-less', function () {
+  return glob([
+      'public/styles/vendor/*.css',
+      'public/styles/gib.less',
     ])
     .pipe(less())
     .pipe(concat('gib.css'))
-    .pipe(rev())
     .pipe(dest('public/resources'))
     .pipe(livereload(lr));
-
-  task.on('end', function () {
-    lessDone.emit('done');
-  });
 });
 
-task('css', function () {
-  glob('public/resources/**.css')
-    .pipe(concat())
-})
+task('minify', ['compile-less'], function (done) {
+
+  var isProduction = process.env.NODE_ENV === 'production';
+
+  return glob('public/resources/gib.css')
+    .pipe(rev())
+    .pipe(gulpif(isProduction, minifyCss()))
+    .pipe(dest('public/resources'))
+    .pipe(es.wait(function (err, data) {
+
+      glob('public/resources/**.css')
+        .pipe(filter('!**/gib-*.css'))
+        .pipe(rimraf());
+    }));
+});
 
 task('clean', function () {
-  glob('public/resources*')
+  return glob('public/resources/*')
     .pipe(rimraf({ force: true }));
 });
 
 task('lint', function () {
-  glob(['**/*.js',
+  return glob(['**/*.js',
         '!node_modules/**',
         '!public/resources/**',
         '!**/vendor/**'])
@@ -85,7 +90,7 @@ task('lint', function () {
     .pipe(jshint.reporter('default'));
 });
 
-task('nodemon', function () {
+task('nodemon', ['compile-less'], function () {
   var nodemon = spawn('./run');
   nodemon.stdout.pipe(process.stdout);
   nodemon.stderr.pipe(process.stderr);
