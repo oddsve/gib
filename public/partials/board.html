@@ -27,7 +27,7 @@
                     id="issue-{{issue.id}}">
                     <div class="issue-content" >
                         <img ng-show="issue.assignee.avatar_url" class="issue-avatar" ng-src="{{issue.assignee.avatar_url}}"/>
-                        <a href="{{issue.html_url}}" target="_blank"  class="issue-number">#{{issue.number}}</a>
+                        <a ng-click="$event.stopPropagation()" ng-href="{{issue.html_url}}" target="_blank"  class="issue-number">#{{issue.number}}</a>
                         <span class="issue-title">{{issue.title}}</span>
                         <ul class="issue-labels">
                             <li class="issue-label"
