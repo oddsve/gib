@@ -48,7 +48,6 @@ angular.module('gib.controllers', [ 'ngDialog' ])
         .issueComments(user, repo, issue.number)
         .then(function (comments) {
           $scope.selectedIssue.comments = comments;
-          debugger
           ngDialog.open({
             template: 'partials/issue-popup.html',
             className: 'selected-issue ngdialog-theme-default',
