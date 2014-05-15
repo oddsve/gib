@@ -21,6 +21,10 @@ angular.module('gib.services', [])
     return github.getIssues(user, repository);
   }
 
+  function issueComments (user, repository, issueNumber) {
+    return github.getIssueComments(user, repository, issueNumber);
+  }
+
   function repos () {
     var d = $q.defer();
     var user = github.getUser();
@@ -75,6 +79,14 @@ angular.module('gib.services', [])
     return d.promise;
   }
 
+  function listIssueComments(user, repo, issueNumber){
+    var d = $q.defer();
+    issueComments(user, repo, issueNumber)
+      .list({}, resolver(d));
+    return d.promise;
+
+  }
+
   return {
     repo: repo,
     repos: repos,
@@ -84,7 +96,8 @@ angular.module('gib.services', [])
     createBranch: createBranch,
     read: read,
     write: write,
-    issues: listIssues
+    issues: listIssues,
+    issueComments: listIssueComments
   };
 }])
 

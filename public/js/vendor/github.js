@@ -725,11 +725,27 @@
       };
     };
 
+
+    Github.IssueComment = function(options){
+      var path = "/repos/" + options.user + "/" + options.repo + "/issues/" + options.issueNumber + "/comments";
+
+      this.list = function(options, cb) {
+        _requestAllPages( path, function(err, res) {
+          cb(err,res)
+        });
+      };
+
+    }
+
     // Top Level API
     // -------
 
     this.getIssues = function(user, repo) {
       return new Github.Issue({user: user, repo: repo});
+    };
+
+    this.getIssueComments = function(user, repo, issueNumber){
+      return new Github.IssueComment({user: user, repo: repo, issueNumber: issueNumber});
     };
 
     this.getRepo = function(user, repo) {

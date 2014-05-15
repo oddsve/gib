@@ -9,3 +9,12 @@
     {{selectedIssue.body}}
   </pre>
 </div>
+<div>
+
+    <div class="comment" ng-repeat="comment in selectedIssue.comments">
+        <div class="user"><img class="issue-avatar comment-avatar" ng-src="{{comment.user.avatar_url}}"/> {{comment.user.login}}
+            <span class="dato"> {{comment.created_at}}</span></div>
+        {{comment.body}}
+    </div>
+</div>
+

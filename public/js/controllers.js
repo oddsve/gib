@@ -32,8 +32,8 @@ angular.module('gib.controllers', [ 'ngDialog' ])
 }])
 
 .controller('BoardController',
-  ['$scope', 'Gib', '$routeParams', 'ngDialog',
-  function ($scope, Gib, $routeParams, ngDialog) {
+  ['$scope', 'Gib', 'Github', '$routeParams', 'ngDialog',
+  function ($scope, Gib, Github, $routeParams, ngDialog) {
 
     var repo = $scope.repoName = $routeParams.repo;
     var user = $routeParams.user;
@@ -44,11 +44,17 @@ angular.module('gib.controllers', [ 'ngDialog' ])
 
     $scope.onClick = function (issue) {
       $scope.selectedIssue = issue;
-      ngDialog.open({
-        template: 'partials/issue-popup.html',
-        className: 'selected-issue ngdialog-theme-default',
-        scope: $scope
-      });
+      Github
+        .issueComments(user, repo, issue.number)
+        .then(function (comments) {
+          $scope.selectedIssue.comments = comments;
+          debugger
+          ngDialog.open({
+            template: 'partials/issue-popup.html',
+            className: 'selected-issue ngdialog-theme-default',
+            scope: $scope
+          });
+        });
     };
 
     Gib.findOrCreateBoard(user, repo)
