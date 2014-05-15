@@ -44,8 +44,7 @@ angular.module('gib.controllers', [ 'ngDialog' ])
 
     $scope.onClick = function (issue) {
       $scope.selectedIssue = issue;
-      Github
-        .issueComments(user, repo, issue.number)
+      Github.issueComments(user, repo, issue.number)
         .then(function (comments) {
           $scope.selectedIssue.comments = comments;
           ngDialog.open({

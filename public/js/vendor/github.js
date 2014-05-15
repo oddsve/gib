@@ -720,7 +720,7 @@
 
       this.list = function(options, cb) {
         _requestAllPages( path, function(err, res) {
-          cb(err,res)
+          cb(err,res);
         });
       };
     };
@@ -731,11 +731,11 @@
 
       this.list = function(options, cb) {
         _requestAllPages( path, function(err, res) {
-          cb(err,res)
+          cb(err,res);
         });
       };
 
-    }
+    };
 
     // Top Level API
     // -------
