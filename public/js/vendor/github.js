@@ -410,7 +410,9 @@
           "parents": [
             parent
           ],
-          "tree": tree
+          "tree": tree,
+          "email": "getgib@getgib.getgib",
+          "name": "getgib"
         };
 
         _request("POST", repoPath + "/git/commits", data, function(err, res) {
