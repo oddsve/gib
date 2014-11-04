@@ -405,14 +405,13 @@
         var data = {
           "message": message,
           "author": {
-            "name": options.username
+            "email": "getgib@getgib.getgib",
+            "name": "getgib"
           },
           "parents": [
             parent
           ],
-          "tree": tree,
-          "email": "getgib@getgib.getgib",
-          "name": "getgib"
+          "tree": tree
         };
 
         _request("POST", repoPath + "/git/commits", data, function(err, res) {
